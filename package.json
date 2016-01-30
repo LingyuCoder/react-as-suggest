@@ -56,7 +56,9 @@
     "url": "git+https://github.com/LingyuCoder/react-as-suggest.git"
   },
   "keywords": [
-    "react"
+    "react",
+    "suggest",
+    "input"
   ],
   "bugs": {
     "url": "https://github.com/LingyuCoder/react-as-suggest/issues"
@@ -64,5 +66,8 @@
   "homepage": "https://github.com/LingyuCoder/react-as-suggest#readme",
   "publishConfig": {
     "registry": "http://registry.npmjs.org/"
+  },
+  "dependencies": {
+    "react-as-input": "^1.0.1"
   }
 }
