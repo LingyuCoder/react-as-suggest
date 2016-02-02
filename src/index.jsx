@@ -151,7 +151,7 @@ Suggest.propTypes = {
    */
   suggests: React.PropTypes.arrayOf(React.PropTypes.string),
   /**
-   * whether suggest is auto filter by current input value
+   * whether suggest is auto filter by current value
    */
   useFilter: React.PropTypes.bool,
   /**
