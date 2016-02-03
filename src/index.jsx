@@ -3,6 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Input from 'react-as-input';
 import ClassNames from 'classnames';
+const noop = () => {};
 class Suggest extends React.Component {
   constructor(props) {
     super();
@@ -11,7 +12,6 @@ class Suggest extends React.Component {
       value: props.value || props.defaultValue
     };
     this._handleInputChange = this._handleInputChange.bind(this);
-    this._handleSuggestClick = this._handleSuggestClick.bind(this);
     this._handleSuggestClick = this._handleSuggestClick.bind(this);
     this._handleFocus = this._handleFocus.bind(this);
     this._handleDocClick = this._handleDocClick.bind(this);
@@ -34,6 +34,7 @@ class Suggest extends React.Component {
     const index = parseInt(e.target.getAttribute('data-index'));
     const value = this.props.suggests[index];
     this.setState({ show: false, value });
+    this._focus = false;
     this.props.onChange(value);
     this.props.onBlur(value);
   }
@@ -70,16 +71,14 @@ class Suggest extends React.Component {
     return (
       <div className={classes} style={{width: this.props.width}}>
         <Input
-            disabled={this.props.disabled}
-            name={this.props.name}
+            {...this.props}
+            className={this.props.inputClassName}
+            onBlur={noop}
             onChange={this._handleInputChange}
             onFocus={this._handleFocus}
             placeholder={this.props.placeholder}
-            readOnly={this.props.readOnly}
-            skin={this.props.skin}
             type="text"
             value={this.state.value}
-            width={this.props.width}
           />
         { show && <ul className="ra-suggest-list" style={{maxHeight: this.props.maxHeight}}>{suggests}</ul> }
       </div>
@@ -92,10 +91,11 @@ Suggest.defaultProps = {
   useFilter: true,
   name: null,
   skin: 'default',
-  onChange: () => {},
-  onFocus: () => {},
-  onBlur: () => {},
+  onChange: noop,
+  onFocus: noop,
+  onBlur: noop,
   className: 'ra-suggest',
+  inputClassName: 'ra-input',
   width: 280,
   maxHeight: 160,
   suggests: [],
@@ -103,7 +103,7 @@ Suggest.defaultProps = {
 };
 Suggest.propTypes = {
   /**
-   * className of the suggest input
+   * class name of the suggest input
    */
   className: React.PropTypes.string,
   /**
@@ -114,6 +114,10 @@ Suggest.propTypes = {
    * whether the suggest input is disabled
    */
   disabled: React.PropTypes.bool,
+  /**
+   * class name of the input
+   */
+  inputClassName: React.PropTypes.string,
   /**
    * max height of the suggest panel
    */
