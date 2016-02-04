@@ -39,11 +39,18 @@ class Suggest extends React.Component {
     this.props.onBlur(value);
   }
   _handleDocClick(e) {
-    if (e.target === ReactDOM.findDOMNode(this).querySelector('.ra-input')) return;
-    if (!this._focus) return;
+    let dom = null;
+    try {
+      dom = ReactDOM.findDOMNode(this);
+    } catch (e) {
+      return 1;
+    }
+    if (e.target === dom.querySelector('.ra-input')) return 2;
+    if (!this._focus) return 3;
     this._focus = false;
     this.setState({ show: false });
     this.props.onBlur(this.state.value);
+    return 4;
   }
   _handleFocus() {
     if (this.props.disabled || this.props.readOnly) return;
@@ -64,13 +71,14 @@ class Suggest extends React.Component {
   render() {
     const suggests = this._getSuggests();
     let show = this.state.show && suggests.length > 0;
-    let classes = ClassNames({
+    const classes = ClassNames({
       [this.props.className]: true,
       show: show
     });
     return (
       <div className={classes} style={{width: this.props.width}}>
         <Input
+            ref="input"
             {...this.props}
             className={this.props.inputClassName}
             onBlur={noop}
@@ -80,7 +88,7 @@ class Suggest extends React.Component {
             type="text"
             value={this.state.value}
           />
-        { show && <ul className="ra-suggest-list" style={{maxHeight: this.props.maxHeight}}>{suggests}</ul> }
+        <ul className="ra-suggest-list" ref="suggest" style={{maxHeight: this.props.maxHeight}}>{suggests}</ul>
       </div>
     );
   }

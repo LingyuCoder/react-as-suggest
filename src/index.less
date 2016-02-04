@@ -10,7 +10,13 @@
   position: relative;
   display: inline-block;
   color: @text-normal;
+  &.show {
+    .ra-suggest-list {
+      display: block;
+    }
+  }
   .ra-suggest-list {
+    display: none;
     position: absolute;
     margin: 0;
     padding: 0;
