@@ -31,7 +31,7 @@ class Suggest extends React.Component {
   }
   _handleInputChange(e) {
     let value = e.target.value;
-    this.setState({ value, show: true });
+    this.setState({ value, show: true, focus: -1 });
     this.props.onChange(value);
   }
   _handleSuggestClick(e) {
@@ -62,13 +62,15 @@ class Suggest extends React.Component {
     this.props.onFocus(this.state.value);
   }
   _getSuggests() {
+    let focus = this.state.focus;
     return this.props.suggests.map((suggest, index) => {
       const shouldShow = this.props.useFilter ? suggest.indexOf(this.state.value) !== -1: true;
       const classes = ClassNames({
         'ra-suggest-item': true,
         selected: suggest === this.state.value,
-        focus: this.state.focus === index
+        focus: shouldShow && focus === 0
       });
+      shouldShow && focus--;
       return shouldShow ? <li className={classes} data-index={index} key={`${suggest}-${index}`} onMouseDown={this._handleSuggestClick} onMouseEnter={this._handleItemMouseEnter} onMouseLeave={this._handleItemMouseLeave}>{suggest}</li> : null;
     }).filter(s => !!s);
   }
@@ -81,7 +83,7 @@ class Suggest extends React.Component {
   }
   _handleKeyPress(e) {
     let focus = this.state.focus;
-    const suggests = this.props.suggests;
+    const suggests = this.props.suggests.filter(suggest => this.props.useFilter ? suggest.indexOf(this.state.value) !== -1: true);
     if (e.which === 38 || e.which === 40) {
       e.preventDefault();
       if (focus === -1)
