@@ -27,7 +27,6 @@ $ npm install --save react-as-suggest
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Suggest from 'react-as-suggest';
-
 ReactDOM.render(
   <div className="fields">
     <div className="field">
