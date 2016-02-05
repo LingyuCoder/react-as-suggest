@@ -117,6 +117,37 @@ describe('test', () => {
     TestUtils.Simulate.focus(input);
     cp._handleDocClick({});
   });
+  it('Should use arrow down to select the suggest', () => {
+    let cp = ReactDOM.render(<Suggest suggests={['abc', 'abd', 'fff']} useFilter={false} value="aabbcc"/>, container);
+    cp = TestUtils.findRenderedComponentWithType(cp, Suggest);
+    let input = TestUtils.findRenderedDOMComponentWithClass(cp, 'ra-input');
+    TestUtils.Simulate.focus(input);
+    TestUtils.Simulate.keyDown(input, {key: 'Down', keyCode: 40, which: 40});
+    TestUtils.Simulate.keyDown(input, {key: 'Down', keyCode: 40, which: 40});
+    TestUtils.Simulate.keyDown(input, {key: 'Enter', keyCode: 13, which: 13});
+    input.value.should.be.eql('abd');
+  });
+  it('Should use arrow up to select the suggest', () => {
+    let cp = ReactDOM.render(<Suggest suggests={['abc', 'abd', 'fff']}/>, container);
+    cp = TestUtils.findRenderedComponentWithType(cp, Suggest);
+    let input = TestUtils.findRenderedDOMComponentWithClass(cp, 'ra-input');
+    TestUtils.Simulate.focus(input);
+    TestUtils.Simulate.keyDown(input, {key: 'Up', keyCode: 38, which: 38});
+    TestUtils.Simulate.keyDown(input, {key: 'Up', keyCode: 38, which: 38});
+    TestUtils.Simulate.keyDown(input, {key: 'Enter', keyCode: 13, which: 13});
+    input.value.should.be.eql('abd');
+  });
+  it('Should use arrow and hover to select the suggest', () => {
+    let cp = ReactDOM.render(<Suggest suggests={['abc', 'abd', 'fff']}/>, container);
+    cp = TestUtils.findRenderedComponentWithType(cp, Suggest);
+    let input = TestUtils.findRenderedDOMComponentWithClass(cp, 'ra-input');
+    TestUtils.Simulate.focus(input);
+    let suggestItems = TestUtils.scryRenderedDOMComponentsWithClass(cp, 'ra-suggest-item');
+    TestUtils.Simulate.mouseEnter(suggestItems[1]);
+    TestUtils.Simulate.keyDown(input, {key: 'Down', keyCode: 40, which: 40});
+    TestUtils.Simulate.keyDown(input, {key: 'Enter', keyCode: 13, which: 13});
+    input.value.should.be.eql('fff');
+  });
 });
 if (window.mochaPhantomJS) {
   window.mochaPhantomJS.run();

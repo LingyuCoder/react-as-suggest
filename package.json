@@ -1,6 +1,6 @@
 {
   "name": "react-as-suggest",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A React auto-suggest text input",
   "main": "./src/index.jsx",
   "scripts": {
