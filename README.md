@@ -71,7 +71,7 @@ ReactDOM.render(
 | :--- | :----- | :--- | :---: | :---: |
 | className | class name of the suggest input | String |  | `'ra-suggest'` |
 | defaultValue | default value of the suggest input | String |  | `''` |
-| disabled | whether the suggest input is disabled | Boolean |  |  |
+| disabled | whether the suggest input is disabled | Boolean |  | `false` |
 | inputClassName | class name of the input | String |  | `'ra-input'` |
 | maxHeight | max height of the suggest panel | Number |  | `160` |
 | name | name of the suggest input in the form | String |  | `null` |

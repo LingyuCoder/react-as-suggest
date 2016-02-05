@@ -128,6 +128,7 @@ Suggest.displayName = 'Suggest';
 Suggest.defaultProps = {
   defaultValue: '',
   useFilter: true,
+  disabled: false,
   name: null,
   skin: 'default',
   onChange: noop,
