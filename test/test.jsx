@@ -138,15 +138,15 @@ describe('test', () => {
     input.value.should.be.eql('abd');
   });
   it('Should use arrow and hover to select the suggest', () => {
-    let cp = ReactDOM.render(<Suggest suggests={['abc', 'abd', 'fff']}/>, container);
+    let cp = ReactDOM.render(<Suggest suggests={['zzz', 'abc', 'abd', 'fff']} value="ab"/>, container);
     cp = TestUtils.findRenderedComponentWithType(cp, Suggest);
     let input = TestUtils.findRenderedDOMComponentWithClass(cp, 'ra-input');
     TestUtils.Simulate.focus(input);
     let suggestItems = TestUtils.scryRenderedDOMComponentsWithClass(cp, 'ra-suggest-item');
-    TestUtils.Simulate.mouseEnter(suggestItems[1]);
+    TestUtils.Simulate.mouseEnter(suggestItems[0]);
     TestUtils.Simulate.keyDown(input, {key: 'Down', keyCode: 40, which: 40});
     TestUtils.Simulate.keyDown(input, {key: 'Enter', keyCode: 13, which: 13});
-    input.value.should.be.eql('fff');
+    input.value.should.be.eql('abd');
   });
 });
 if (window.mochaPhantomJS) {

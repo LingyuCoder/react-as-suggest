@@ -63,6 +63,7 @@ class Suggest extends React.Component {
   }
   _getSuggests() {
     let focus = this.state.focus;
+    let findex = 0;
     return this.props.suggests.map((suggest, index) => {
       const shouldShow = this.props.useFilter ? suggest.indexOf(this.state.value) !== -1: true;
       const classes = ClassNames({
@@ -71,11 +72,11 @@ class Suggest extends React.Component {
         focus: shouldShow && focus === 0
       });
       shouldShow && focus--;
-      return shouldShow ? <li className={classes} data-index={index} key={`${suggest}-${index}`} onMouseDown={this._handleSuggestClick} onMouseEnter={this._handleItemMouseEnter} onMouseLeave={this._handleItemMouseLeave}>{suggest}</li> : null;
+      return shouldShow ? <li className={classes} data-findex={findex++} data-index={index} key={`${suggest}-${index}`} onMouseDown={this._handleSuggestClick} onMouseEnter={this._handleItemMouseEnter} onMouseLeave={this._handleItemMouseLeave}>{suggest}</li> : null;
     }).filter(s => !!s);
   }
   _handleItemMouseEnter(e) {
-    const focus = parseInt(e.target.getAttribute('data-index'));
+    const focus = parseInt(e.target.getAttribute('data-findex'));
     this.setState({ focus });
   }
   _handleItemMouseLeave() {
