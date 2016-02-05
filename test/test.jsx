@@ -115,7 +115,7 @@ describe('test', () => {
     cp = TestUtils.findRenderedComponentWithType(cp, Suggest);
     let input = TestUtils.findRenderedDOMComponentWithClass(cp, 'ra-input');
     TestUtils.Simulate.focus(input);
-    console.log(cp._handleDocClick({}));
+    cp._handleDocClick({});
   });
 });
 if (window.mochaPhantomJS) {

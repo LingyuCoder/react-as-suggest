@@ -33,9 +33,10 @@ import Suggest from 'react-as-suggest';
 [insert]: # (start:src/index.jsx|doc)
 | Name | Description | Type | Required | Default Value |
 | :--- | :----- | :--- | :---: | :---: |
-| className | className of the suggest input | String |  | `'ra-suggest'` |
+| className | class name of the suggest input | String |  | `'ra-suggest'` |
 | defaultValue | default value of the suggest input | String |  | `''` |
 | disabled | whether the suggest input is disabled | Boolean |  |  |
+| inputClassName | class name of the input | String |  | `'ra-input'` |
 | maxHeight | max height of the suggest panel | Number |  | `160` |
 | name | name of the suggest input in the form | String |  | `null` |
 | onBlur | callback when blur | Function |  | `() => {}` |
@@ -45,7 +46,7 @@ import Suggest from 'react-as-suggest';
 | readOnly | wheher this suggest input is readonly | Boolean |  |  |
 | skin | skin of the suggest input | 'success'│'error'│'default' |  | `'default'` |
 | suggests | suggset list | Array(String) |  | `[]` |
-| useFilter | whether suggest is auto filter by current input value | Boolean |  | `true` |
+| useFilter | whether suggest is auto filter by current value | Boolean |  | `true` |
 | value | current value | String |  |  |
 | width | width of the suggest input | Number |  | `280` |
 [insert]: # (end:src/index.jsx)

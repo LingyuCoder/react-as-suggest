@@ -43,14 +43,13 @@ class Suggest extends React.Component {
     try {
       dom = ReactDOM.findDOMNode(this);
     } catch (e) {
-      return 1;
+      return;
     }
-    if (e.target === dom.querySelector('.ra-input')) return 2;
-    if (!this._focus) return 3;
+    if (e.target === dom.querySelector('.ra-input')) return;
+    if (!this._focus) return;
     this._focus = false;
     this.setState({ show: false });
     this.props.onBlur(this.state.value);
-    return 4;
   }
   _handleFocus() {
     if (this.props.disabled || this.props.readOnly) return;
